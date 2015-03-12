@@ -1,4 +1,4 @@
-# generator-adorable-docs [![Build Status](https://secure.travis-ci.com/adorableio/generator-adorable-docs.png?branch=master)](https://travis-ci.com/adorableio/generator-adorable-docs)
+# generator-adorable-docs [![Build Status](https://magnum.travis-ci.com/adorableio/generator-adorable-docs.svg?token=LS42rQkrhbSaxXy7ZoZR&branch=master)](https://magnum.travis-ci.com/adorableio/generator-adorable-docs)
 
 ![adorable](https://lh5.googleusercontent.com/UEcqj3Px5TKFPww4GfhjLPaEAWcXcqpC9DAZYMN_YjgA4g5CbrQpoEcv6H67RjQ6urtMzpcCAnM=w1632-h1596)
 
