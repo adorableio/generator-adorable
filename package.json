@@ -1,10 +1,10 @@
 {
-  "name": "generator-adorable-docs",
+  "name": "generator-adorable",
   "version": "0.0.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "itsthatguy/generator-adorable-docs",
+  "repository": "itsthatguy/generator-adorable",
   "author": {
     "name": "Kevin Altman",
     "email": "kevin@itsthatguy.com",
@@ -15,8 +15,8 @@
   },
   "scripts": {
     "test": "npm run compile && node_modules/.bin/mocha",
-    "compile": "gulp compile",
-    "prepublish": "npm run compile",
+    "compile": "gulp",
+    "prepublish": "gulp",
     "start": "gulp watch"
   },
   "files": [
@@ -29,6 +29,7 @@
     "chalk": "^1.0.0",
     "fs-extra": "~0.8.1",
     "js-yaml": "^3.2.7",
+    "lodash": "^3.5.0",
     "yeoman-generator": "^0.18.9",
     "yosay": "^1.0.2"
   },
