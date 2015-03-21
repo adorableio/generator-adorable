@@ -3,8 +3,8 @@ var coffee  = require("gulp-coffee"),
     plumber = require("gulp-plumber"),
     watch   = require("gulp-watch");
 
-var compileSrc = "src/**/*.coffee",
-    templatesSrc = ["src/**/*", "!src/**/*.coffee"];
+var compileSrc = ["src/**/*.coffee", "!src/*/templates/**/*.coffee"],
+    templatesSrc = ["src/**/*", "!src/*/index.coffee"];
 
 // Task
 gulp.task('compile', function() {
@@ -29,6 +29,10 @@ gulp.task("watch", ["default"], function() {
 
   watch(templatesSrc, function() {
     gulp.start("templates");
+  });
+
+  watch("Gulpfile.js", function() {
+    gulp.start("default");
   });
 });
 
