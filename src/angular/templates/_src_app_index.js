@@ -4,7 +4,7 @@ import Navbar from './components/navbar/navbar'; // jshint ignore:line
 import Data   from './components/data/data';     // jshint ignore:line
 import Main   from './main/main';                // jshint ignore:line
 
-angular.module('$FIXME$',
+angular.module('<%= projectName %>',
   ['ngAnimate',
    'ngCookies',
    'ngTouch',
@@ -12,9 +12,9 @@ angular.module('$FIXME$',
    'ngResource',
    'ui.router',
    'mm.foundation',
-   '$FIXME$.Navbar',
-   '$FIXME$.Data',
-   '$FIXME$.Main']
+   '<%= projectName %>.Navbar',
+   '<%= projectName %>.Data',
+   '<%= projectName %>.Main']
 )
 
 // DO NOT EDIT OR REMOVE THESE NEXT 2 LINES

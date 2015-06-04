@@ -2,6 +2,7 @@
 yeoman  = require('yeoman-generator')
 chalk   = require('chalk')
 _       = require('lodash')
+path    = require('path')
 
 module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
   constructor: (args, options, config) ->
@@ -28,6 +29,23 @@ module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
       default: true
 
     @prompts.push
+      name: 'nwjs',
+      type: 'confirm',
+      message: "Is this an nw.js project?"
+      default: false
+
+    @prompts.push
+      name: 'projectName',
+      type: 'input',
+      message: "What is the name of your project? (no spaces, or symbols)"
+      default: process.cwd().split(path.sep).pop()
+
+    @prompts.push
+      name: 'projectDesc',
+      type: 'input',
+      message: "Enter a brief project description"
+
+    @prompts.push
       name: 'src',
       type: 'confirm',
       message: "Do you want to generate the full src folder?"
@@ -44,7 +62,12 @@ module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
         @config[question] = answer
       done()
 
-  projectFile: ->
+  projectfiles: ->
+    @fs.copyTpl(
+      @templatePath('_package.json')
+      @destinationPath('package.json')
+      @config
+    )
     @fs.copy @templatePath('.jshintrc'), @destinationPath('.jshintrc')
     @fs.copy @templatePath('Gulpfile.js'), @destinationPath('Gulpfile.js')
     @fs.copy @templatePath('Procfile'), @destinationPath('Procfile')
@@ -54,7 +77,7 @@ module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
   gulpfiles: ->
     return if !@config.generate || !@config.gulp
     @fs.copyTpl(
-      @templatePath('_Gulpfile.js')
+      @templatePath('Gulpfile.js')
       @destinationPath('Gulpfile.js')
     )
     @fs.copy(
@@ -63,6 +86,7 @@ module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
     )
 
   srcfiles: ->
+    console.log @config
     return if !@config.generate || !@config.src
     @fs.copy(
       @templatePath('src')
@@ -71,39 +95,33 @@ module.exports = AdorableGulpGenerator = yeoman.generators.Base.extend
     @fs.copyTpl(
       @templatePath('_src_app_components_data_data.js')
       @destinationPath('src/app/components/data/data.js')
+      @config
     )
     @fs.copyTpl(
       @templatePath('_src_app_components_navbar_navbar.js')
       @destinationPath('src/app/components/navbar/navbar.js')
+      @config
     )
     @fs.copyTpl(
       @templatePath('_src_app_index.jade')
       @destinationPath('src/app/index.jade')
+      @config
     )
     @fs.copyTpl(
       @templatePath('_src_app_index.js')
       @destinationPath('src/app/index.js')
+      @config
     )
     @fs.copyTpl(
       @templatePath('_src_app_main_main.js')
       @destinationPath('src/app/main/main.js')
+      @config
     )
     @fs.copyTpl(
       @templatePath('_src_app_main_thing_thing.js')
       @destinationPath('src/app/main/thing/thing.js')
+      @config
     )
-
-  packageFile: ->
-    return if !@config.generate
-    packageFile = {
-      to: @destinationPath('package.json')
-      from: @templatePath('_package.json')
-    }
-    return if !@fs.exists(packageFile.to)
-    pkgTo = @fs.readJSON(packageFile.to)
-    pkgFrom = @fs.readJSON(packageFile.from)
-
-    @fs.writeJSON(packageFile.to, _.merge(pkgTo, pkgFrom))
 
    end: ->
     @options['callback'] = => @emit('allDone')
